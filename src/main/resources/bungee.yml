@@ -1,0 +1,4 @@
+name: QueueRoomSystem
+version: 1.0.0
+author: Eric Lam
+main: com.ericlam.mc.queueroomsystem.QueueRoomSystem
