@@ -2,6 +2,7 @@ package com.ericlam.mc.queueroomsystem;
 
 import com.ericlam.mc.bungee.dnmc.config.YamlManager;
 import com.ericlam.mc.bungee.dnmc.main.DragonNiteMC;
+import net.md_5.bungee.api.connection.Server;
 import net.md_5.bungee.api.event.PlayerDisconnectEvent;
 import net.md_5.bungee.api.event.ServerConnectEvent;
 import net.md_5.bungee.api.event.ServerConnectedEvent;
@@ -20,11 +21,11 @@ public class QueueRoomSystem extends Plugin implements Listener {
     @Override
     public void onEnable() {
         super.onEnable();
-        DragonNiteMC.getAPI().getCommandRegister().registerCommand(this, new QueueRoomCommand());
         yamlManager = DragonNiteMC.getAPI().getConfigFactory(this)
                 .register(QueueRoomConfig.class)
                 .dump();
         config = yamlManager.getConfigAs(QueueRoomConfig.class);
+        DragonNiteMC.getAPI().getCommandRegister().registerCommand(this, new QueueRoomCommand(config));
         queueRoomManager = new QueueRoomManager(new QueueRoomEventBus(config));
         getProxy().getPluginManager().registerListener(this, this);
     }
@@ -46,8 +47,10 @@ public class QueueRoomSystem extends Plugin implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerSwitch(ServerConnectEvent e){
+        Server server = e.getPlayer().getServer();
+        if (server == null) return;
         // 在 queueing 的伺服器中
-        if (config.servers.containsKey(e.getPlayer().getServer().getInfo().getName())) {
+        if (config.servers.containsKey(server.getInfo().getName())) {
             queueRoomManager.removeQueue(e.getPlayer());
         }
     }

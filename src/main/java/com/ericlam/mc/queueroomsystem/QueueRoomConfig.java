@@ -11,6 +11,8 @@ public class QueueRoomConfig extends BungeeConfiguration {
 
 
     public Map<String, QueueSettings> servers;
+    public String availableState;
+    public String getRedisKey;
 
     public static class QueueSettings {
 

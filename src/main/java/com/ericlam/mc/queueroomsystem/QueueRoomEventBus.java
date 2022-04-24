@@ -12,9 +12,6 @@ import java.util.Queue;
 
 public record QueueRoomEventBus(QueueRoomConfig config) implements QueueRoomEvent {
 
-    private static final String GAME_STATE_KEY = "game_room_states";
-    private static final String WAITING_STATE = "WAITING";
-
     private static final Logger BUS_LOGGER = LoggerFactory.getLogger(QueueRoomEventBus.class);
 
     @Override
@@ -32,8 +29,8 @@ public record QueueRoomEventBus(QueueRoomConfig config) implements QueueRoomEven
                         continue;
                     }
 
-                    String state = jedis.hget(GAME_STATE_KEY, room);
-                    boolean available = state.equalsIgnoreCase(WAITING_STATE);
+                    String state = jedis.hget(config.getRedisKey, room);
+                    boolean available = state.equalsIgnoreCase(config.availableState);
 
                     if (info.getPlayers().size() < settings.maxPlayers && available) {
                         int total = proxiedPlayers.size();
