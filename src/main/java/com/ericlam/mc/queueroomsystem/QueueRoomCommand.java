@@ -1,15 +1,6 @@
 package com.ericlam.mc.queueroomsystem;
 
-import com.ericlam.mc.bungee.dnmc.builders.MessageBuilder;
-import com.ericlam.mc.bungee.dnmc.commands.caxerx.CommandNode;
 import com.ericlam.mc.bungee.dnmc.commands.caxerx.DefaultCommand;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.CommandSender;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
-
-import java.text.MessageFormat;
-import java.util.List;
 
 public class QueueRoomCommand extends DefaultCommand {
 
