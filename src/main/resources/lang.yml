@@ -1,4 +1,6 @@
 prefix: "&d排隊// &7"
-not-availble: "你所在的伺服器不能排隊"
+not-available: "你所在的伺服器不能使用排隊指令"
 queued: "你目前已在隊列。"
+not-queued: "你目前沒有在隊列。"
 queue-success: "你已成功進入隊列 {0}/{1}"
+leave-queue-success: "你成功離開隊列。"

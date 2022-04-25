@@ -30,6 +30,8 @@ public record QueueRoomEventBus(QueueRoomConfig config) implements QueueRoomEven
                     }
 
                     String state = jedis.hget(config.getRedisKey, room);
+                    BUS_LOGGER.warn("State：" + state);
+                    if (state == null) continue;
                     boolean available = state.equalsIgnoreCase(config.availableState);
 
                     if (info.getPlayers().size() < settings.maxPlayers && available) {
