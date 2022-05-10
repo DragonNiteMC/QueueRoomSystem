@@ -1,6 +1,6 @@
 package com.ericlam.mc.queueroomsystem;
 
-import com.ericlam.mc.bungee.dnmc.main.DragonNiteMC;
+import com.ericlam.mc.bungee.dnmc.main.DragoniteMC;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -19,7 +19,7 @@ public record QueueRoomEventBus(QueueRoomConfig config) implements QueueRoomEven
         QueueRoomConfig.QueueSettings settings = config.servers.get(server);
         if (settings == null) return; // 保險
         if (proxiedPlayers.size() >= settings.leastPlayers) {
-            try (Jedis jedis = DragonNiteMC.getAPI().getRedisDataSource().getJedis()) {
+            try (Jedis jedis = DragoniteMC.getAPI().getRedisDataSource().getJedis()) {
 
                 for (String room : settings.rooms) {
 
@@ -30,7 +30,6 @@ public record QueueRoomEventBus(QueueRoomConfig config) implements QueueRoomEven
                     }
 
                     String state = jedis.hget(config.getRedisKey, room);
-                    BUS_LOGGER.warn("State：" + state);
                     if (state == null) continue;
                     boolean available = state.equalsIgnoreCase(config.availableState);
 

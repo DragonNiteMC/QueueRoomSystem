@@ -1,7 +1,7 @@
 package com.ericlam.mc.queueroomsystem;
 
 import com.ericlam.mc.bungee.dnmc.config.YamlManager;
-import com.ericlam.mc.bungee.dnmc.main.DragonNiteMC;
+import com.ericlam.mc.bungee.dnmc.main.DragoniteMC;
 import net.md_5.bungee.api.connection.Server;
 import net.md_5.bungee.api.event.ServerConnectEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -19,7 +19,7 @@ public class QueueRoomSystem extends Plugin implements Listener {
     @Override
     public void onEnable() {
         super.onEnable();
-        yamlManager = DragonNiteMC.getAPI().getConfigFactory(this)
+        yamlManager = DragoniteMC.getAPI().getConfigFactory(this)
                 .register(QueueRoomConfig.class)
                 .register(QueueRoomMessage.class)
                 .dump();
@@ -27,7 +27,7 @@ public class QueueRoomSystem extends Plugin implements Listener {
         var msg = yamlManager.getConfigAs(QueueRoomMessage.class);
         queueRoomManager = new QueueRoomManager(new QueueRoomEventBus(config));
         getProxy().getPluginManager().registerListener(this, this);
-        DragonNiteMC.getAPI().getCommandRegister().registerCommand(this,
+        DragoniteMC.getAPI().getCommandRegister().registerCommand(this,
                 new QueueRoomCommand(config, msg, queueRoomManager));
     }
 
