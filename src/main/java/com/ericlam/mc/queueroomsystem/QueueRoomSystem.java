@@ -25,7 +25,7 @@ public class QueueRoomSystem extends Plugin implements Listener {
                 .dump();
         config = yamlManager.getConfigAs(QueueRoomConfig.class);
         var msg = yamlManager.getConfigAs(QueueRoomMessage.class);
-        queueRoomManager = new QueueRoomManager(new QueueRoomEventBus(config));
+        queueRoomManager = new QueueRoomManager(new QueueRoomEventBus(config), this);
         getProxy().getPluginManager().registerListener(this, this);
         DragoniteMC.getAPI().getCommandRegister().registerCommand(this,
                 new QueueRoomCommand(config, msg, queueRoomManager));
