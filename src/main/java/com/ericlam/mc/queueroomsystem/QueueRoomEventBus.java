@@ -4,15 +4,24 @@ import com.ericlam.mc.bungee.dnmc.main.DragoniteMC;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.plugin.Plugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 
+import java.util.Map;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentHashMap;
 
-public record QueueRoomEventBus(QueueRoomConfig config) implements QueueRoomEvent {
+public class QueueRoomEventBus implements QueueRoomEvent {
 
     private static final Logger BUS_LOGGER = LoggerFactory.getLogger(QueueRoomEventBus.class);
+
+    private final QueueRoomConfig config;
+
+    public QueueRoomEventBus(QueueRoomConfig config) {
+        this.config = config;
+    }
 
     @Override
     public void onAddedQueue(String server, Queue<ProxiedPlayer> proxiedPlayers) {
