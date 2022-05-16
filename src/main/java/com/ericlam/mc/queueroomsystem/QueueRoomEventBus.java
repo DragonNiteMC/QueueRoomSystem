@@ -42,7 +42,7 @@ public class QueueRoomEventBus implements QueueRoomEvent {
                     if (state == null) continue;
                     boolean available = state.equalsIgnoreCase(config.availableState);
 
-                    if (info.getPlayers().size() < settings.maxPlayers && available) {
+                    if (info.getPlayers().size() < settings.maxPlayers && (available || ( settings.allowInGame && state.equalsIgnoreCase(config.gameState) ))) {
                         int total = proxiedPlayers.size();
                         int remain = sendServer(info, proxiedPlayers, settings.maxPlayers);
                         BUS_LOGGER.info("成功發送 {} 個玩家到房間 {}，剩餘 {} 個", total - remain, room, remain);

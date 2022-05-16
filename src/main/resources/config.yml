@@ -5,7 +5,9 @@ servers:
       - INF-2
     leastPlayers: 2
     maxPlayers: 16
+    allowInGame: true
 
 
 availableState: VOTING
+gameState: IN_GAME
 getRedisKey: game_room_states

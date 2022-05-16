@@ -12,6 +12,7 @@ public class QueueRoomConfig extends BungeeConfiguration {
 
     public Map<String, QueueSettings> servers;
     public String availableState;
+    public String gameState;
     public String getRedisKey;
 
     public static class QueueSettings {
@@ -19,6 +20,8 @@ public class QueueRoomConfig extends BungeeConfiguration {
         public List<String> rooms;
         public int leastPlayers;
         public int maxPlayers;
+
+        public boolean allowInGame;
 
     }
 }
